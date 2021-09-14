@@ -1,0 +1,17 @@
+---
+# This docker-compose file will start some containers that act like VMs in a VPC
+version: '3.5'
+
+services:
+  host1:
+    image: geerlingguy/docker-centos7-ansible
+    hostname: host1.test.confluent
+    container_name: host1.test.confluent
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  host2:
+    image: geerlingguy/docker-centos7-ansible
+    hostname: host2.test.confluent
+    container_name: host2.test.confluent
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro

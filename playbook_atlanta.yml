@@ -1,0 +1,22 @@
+---
+# This playbook runs a shell command and installs Apache httpd
+#   on all the hosts in the "atlanta" group
+- hosts: atlanta
+  become: true
+
+  vars:
+    awesome_string: "{{ vault_awesome_string }}"
+
+  tasks:
+    - name: Run a cool shell command
+      ansible.builtin.shell: echo "my name is {{ inventory_hostname }} in the {{ group_names }} group(s). {{ awesome_string }}!"
+      register: response
+
+    - name: Output a variable from the previous task
+      debug:
+        var: response.stdout
+
+    - name: Install something with yum
+      ansible.builtin.yum:
+        name: httpd
+        state: latest

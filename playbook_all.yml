@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Run a cool shell command on all hosts
+      ansible.builtin.shell: echo "my name is {{ inventory_hostname }} in the {{ group_names }} group(s)."
+      register: response
+
+    - name: Output a variable from the previous task
+      debug:
+        var: response.stdout
+
+- import_playbook: playbook_atlanta.yml
